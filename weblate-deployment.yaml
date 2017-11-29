@@ -1,0 +1,72 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yml
+    kompose.version: 1.5.0 ()
+  creationTimestamp: null
+  labels:
+    io.kompose.service: weblate
+  name: weblate
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: weblate
+    spec:
+      containers:
+      - env:
+        - name: MEMCACHED_HOST
+          value: cache
+        - name: MEMCACHED_PORT
+          value: "11211"
+        - name: POSTGRES_DATABASE
+          value: weblate
+        - name: POSTGRES_HOST
+          value: database
+        - name: POSTGRES_PASSWORD
+          value: weblate
+        - name: POSTGRES_PORT
+        - name: POSTGRES_USER
+          value: weblate
+        - name: WEBLATE_ADMIN_EMAIL
+          value: noreply@weblate.org
+        - name: WEBLATE_ADMIN_NAME
+          value: Weblate Admin
+        - name: WEBLATE_ADMIN_PASSWORD
+        - name: WEBLATE_ALLOWED_HOSTS
+          value: '*'
+        - name: WEBLATE_DEBUG
+          value: "1"
+        - name: WEBLATE_DEFAULT_FROM_EMAIL
+          value: noreply@weblate.org
+        - name: WEBLATE_EMAIL_HOST
+          value: smtp.gmail.com
+        - name: WEBLATE_EMAIL_PASSWORD
+        - name: WEBLATE_EMAIL_USER
+        - name: WEBLATE_LOGLEVEL
+          value: DEBUG
+        - name: WEBLATE_REGISTRATION_OPEN
+          value: "1"
+        - name: WEBLATE_SERVER_EMAIL
+          value: noreply@weblate.org
+        - name: WEBLATE_SITE_TITLE
+          value: Weblate
+        image: weblate/weblate
+        name: weblate
+        ports:
+        - containerPort: 80
+        resources: {}
+        volumeMounts:
+        - mountPath: /app/data
+          name: weblatedocker-weblate-data
+      restartPolicy: Always
+      volumes:
+      - name: weblatedocker-weblate-data
+        persistentVolumeClaim:
+          claimName: weblatedocker-weblate-data
+status: {}
