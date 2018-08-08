@@ -34,11 +34,21 @@ spec:
           value: cache
         - name: REDIS_PORT
           value: "6379"
-        - name: WEBLATE_ADMIN_EMAIL
-          value: noreply@weblate.org
-        - name: WEBLATE_ADMIN_NAME
-          value: Weblate Admin
-        - name: WEBLATE_ADMIN_PASSWORD
+        - name: "WEBLATE_ADMIN_EMAIL"
+          valueFrom:
+            secretKeyRef:
+              name: admin
+              key: EMAIL
+        - name: "WEBLATE_ADMIN_NAME"
+          valueFrom:
+            secretKeyRef:
+              name: admin
+              key: NAME
+        - name: "WEBLATE_ADMIN_PASSWORD"
+          valueFrom:
+            secretKeyRef:
+              name: admin
+              key: PASSWORD
         - name: WEBLATE_ALLOWED_HOSTS
           value: '*'
         - name: WEBLATE_DEBUG
