@@ -4,7 +4,7 @@
 #
 # - test that Weblate is serving it's files
 # - test creating admin user
-# - runs tessuite
+# - runs testsuite
 #
 # Execute in docker-compose.yml directory, it will create containers and
 # test them.
@@ -15,17 +15,24 @@ CONTAINER=`docker-compose ps | grep _weblate_ | sed 's/[[:space:]].*//'`
 IP=`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $CONTAINER`
 
 echo "Checking '$CONTAINER', IP address '$IP'"
-TIMEOUT=0; while ! curl --fail --silent --output /dev/null "http://$IP/" ; do sleep 1 ; TIMEOUT=$(($TIMEOUT + 1)); if [ $TIMEOUT -gt 120 ] ; then break ;fi ; done
+TIMEOUT=0
+while ! curl --fail --silent --output /dev/null "http://$IP/" ; do
+    sleep 1
+    TIMEOUT=$(($TIMEOUT + 1))
+    if [ $TIMEOUT -gt 60 ] ; then
+        break
+    fi
+done
 curl --verbose --fail "http://$IP/about/" | grep 'Powered by.*Weblate'
 RET=$?
 curl --verbose --fail --output /dev/null "http://$IP/static/weblate-128.png"
 if [ $? -ne 0 -o $RET -ne 0 ] ; then
     docker-compose logs
-    docker exec $CONTAINER tail /var/log/syslog
-    docker exec $CONTAINER tail /var/log/nginx/error.log
-    docker exec $CONTAINER tail /var/log/uwsgi/app/weblate.log
     exit 1
 fi
+
+# Display logs so far
+docker-compose logs
 
 echo "Creating admin..."
 docker-compose run --rm weblate createadmin || exit 1

@@ -10,6 +10,7 @@ You can use following tags on Docker hub:
 
 * `latest` - latest stable release
 * `edge` - bleeding edge docker image (contains stable Weblate, but the Docker image changes might not yet be fully tested)
+* specific tag from [weblate/weblate](https://hub.docker.com/r/weblate/weblate/tags/) image
 
 ## Documentation
 
@@ -42,14 +43,6 @@ https://docs.weblate.org/en/latest/admin/deployments.html#docker
         docker-compose up
 
 4. For more detailed instructions visit https://docs.weblate.org/en/latest/admin/deployments.html#docker
-
-## Maintenance tasks
-
-There are some cron jobs to run. You should set `WEBLATE_OFFLOAD_INDEXING=1` when these are setup
-
-    */5 * * * * cd /usr/share/weblate/; docker-compose run --rm weblate update_index
-    @daily cd /usr/share/weblate/; docker-compose run --rm weblate cleanuptrans
-    @hourly cd /usr/share/weblate-docker/; docker-compose run --rm weblate commit_pending --all --age=96
 
 ## Rebuilding the weblate docker image
 
