@@ -52,21 +52,33 @@ spec:
         - name: WEBLATE_ALLOWED_HOSTS
           value: '*'
         - name: WEBLATE_DEBUG
-          value: "1"
+          value: "0"
         - name: WEBLATE_DEFAULT_FROM_EMAIL
           value: noreply@weblate.org
         - name: WEBLATE_EMAIL_HOST
-          value: smtp.gmail.com
+          valueFrom:
+            secretKeyRef:
+              name: email
+              key: WEBLATE_EMAIL_HOST
         - name: WEBLATE_EMAIL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: email
+              key: WEBLATE_EMAIL_PASSWORD
         - name: WEBLATE_EMAIL_USER
+          valueFrom:
+            secretKeyRef:
+              name: email
+              key: WEBLATE_EMAIL_USER
         - name: WEBLATE_LOGLEVEL
           value: DEBUG
         - name: WEBLATE_REGISTRATION_OPEN
           value: "1"
         - name: WEBLATE_SERVER_EMAIL
           value: noreply@weblate.org
-        - name: WEBLATE_SITE_TITLE
-          value: Weblate
+        envFrom:
+          configMapRef:
+            name: config
         image: weblate/weblate
         name: weblate
         ports:
