@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   annotations:
     kompose.cmd: kompose convert -f docker-compose.yml
-    kompose.version: 1.5.0 ()
+    kompose.version: 1.16.0 ()
   creationTimestamp: null
   labels:
     io.kompose.service: weblate
@@ -20,19 +20,20 @@ spec:
     spec:
       containers:
       - env:
-        - name: MEMCACHED_HOST
-          value: cache
-        - name: MEMCACHED_PORT
-          value: "11211"
+        - name: POSTGRES_DATABASE
+          value: database
         - name: POSTGRES_DATABASE
           value: weblate
-        - name: POSTGRES_HOST
-          value: database
-        - name: POSTGRES_PASSWORD
-          value: weblate
         - name: POSTGRES_PORT
+          value: "5432"
+        - name: POSTGRES_PASSWORD
+          value: ~
         - name: POSTGRES_USER
           value: weblate
+        - name: REDIS_HOST
+          value: cache
+        - name: REDIS_PORT
+          value: "6379"
         - name: WEBLATE_ADMIN_EMAIL
           value: noreply@weblate.org
         - name: WEBLATE_ADMIN_NAME
@@ -63,10 +64,10 @@ spec:
         resources: {}
         volumeMounts:
         - mountPath: /app/data
-          name: weblatedocker-weblate-data
+          name: docker-weblate-data
       restartPolicy: Always
       volumes:
-      - name: weblatedocker-weblate-data
+      - name: docker-weblate-data
         persistentVolumeClaim:
-          claimName: weblatedocker-weblate-data
+          claimName: docker-weblate-data
 status: {}

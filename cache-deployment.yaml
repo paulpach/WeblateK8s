@@ -3,14 +3,15 @@ kind: Deployment
 metadata:
   annotations:
     kompose.cmd: kompose convert -f docker-compose.yml
-    kompose.version: 1.5.0 ()
+    kompose.version: 1.16.0 ()
   creationTimestamp: null
   labels:
     io.kompose.service: cache
   name: cache
 spec:
   replicas: 1
-  strategy: {}
+  strategy:
+    type: Recreate
   template:
     metadata:
       creationTimestamp: null
@@ -18,8 +19,19 @@ spec:
         io.kompose.service: cache
     spec:
       containers:
-      - image: memcached:1.5-alpine
+      - args:
+        - redis-server
+        - --appendonly
+        - "yes"
+        image: redis:4-alpine
         name: cache
         resources: {}
+        volumeMounts:
+        - mountPath: /data
+          name: docker-redis-data
       restartPolicy: Always
+      volumes:
+      - name: docker-redis-data
+        persistentVolumeClaim:
+          claimName: docker-redis-data
 status: {}
