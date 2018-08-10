@@ -77,7 +77,7 @@ spec:
         - name: WEBLATE_SERVER_EMAIL
           value: noreply@weblate.org
         envFrom:
-          configMapRef:
+        - configMapRef:
             name: config
         image: weblate/weblate
         name: weblate
