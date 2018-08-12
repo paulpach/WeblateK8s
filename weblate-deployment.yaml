@@ -49,8 +49,6 @@ spec:
             secretKeyRef:
               name: admin
               key: PASSWORD
-        - name: WEBLATE_ALLOWED_HOSTS
-          value: '*'
         - name: WEBLATE_DEBUG
           value: "0"
         - name: WEBLATE_DEFAULT_FROM_EMAIL

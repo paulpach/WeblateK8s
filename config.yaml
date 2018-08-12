@@ -5,4 +5,4 @@ metadata:
   namespace: default
 data:
   WEBLATE_SITE_TITLE: Weblate
-     
+  WEBLATE_ALLOWED_HOSTS: translate.blockstory.net
