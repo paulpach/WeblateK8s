@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - env:
-        - name: POSTGRES_DATABASE
+        - name: POSTGRES_HOST
           value: database
         - name: POSTGRES_DATABASE
           value: weblate
@@ -49,15 +49,16 @@ spec:
             secretKeyRef:
               name: admin
               key: PASSWORD
-        - name: WEBLATE_DEBUG
-          value: "0"
-        - name: WEBLATE_DEFAULT_FROM_EMAIL
-          value: noreply@weblate.org
         - name: WEBLATE_EMAIL_HOST
           valueFrom:
             secretKeyRef:
               name: email
               key: WEBLATE_EMAIL_HOST
+        - name: WEBLATE_EMAIL_PORT
+          valueFrom:
+            secretKeyRef:
+              name: email
+              key: WEBLATE_EMAIL_PORT
         - name: WEBLATE_EMAIL_PASSWORD
           valueFrom:
             secretKeyRef:
@@ -68,12 +69,16 @@ spec:
             secretKeyRef:
               name: email
               key: WEBLATE_EMAIL_USER
-        - name: WEBLATE_LOGLEVEL
-          value: DEBUG
-        - name: WEBLATE_REGISTRATION_OPEN
-          value: "1"
         - name: WEBLATE_SERVER_EMAIL
-          value: noreply@weblate.org
+          valueFrom:
+            secretKeyRef:
+              name: email
+              key: WEBLATE_SERVER_EMAIL
+        - name: WEBLATE_DEFAULT_FROM_EMAIL
+          valueFrom:
+            secretKeyRef:
+              name: email
+              key: WEBLATE_DEFAULT_FROM_EMAIL
         envFrom:
         - configMapRef:
             name: config

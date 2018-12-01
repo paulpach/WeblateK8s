@@ -19,7 +19,7 @@ spec:
         app: postgres
     spec:
       containers:
-      - image: "postgres:alpine"
+      - image: "postgres:10-alpine"
         name: postgres
         env:
         - name: PGDATA
