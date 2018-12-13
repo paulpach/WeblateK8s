@@ -1,19 +1,16 @@
 apiVersion: v1
 kind: Service
 metadata:
-  annotations:
-    kompose.cmd: kompose convert -f docker-compose.yml
-    kompose.version: 1.16.0 ()
-  creationTimestamp: null
   labels:
     io.kompose.service: weblate
   name: weblate
 spec:
   ports:
-  - name: "80"
+  - name: "http"
+    protocol: TCP
     port: 80
     targetPort: 80
   selector:
     io.kompose.service: weblate
-status:
-  loadBalancer: {}
+  type: NodePort
+
