@@ -86,7 +86,9 @@ spec:
         name: weblate
         ports:
         - containerPort: 80
-        resources: {}
+        resources:
+          requests:
+            cpu: 10m
         volumeMounts:
         - mountPath: /app/data
           name: docker-weblate-data

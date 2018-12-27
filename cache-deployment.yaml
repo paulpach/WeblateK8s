@@ -25,7 +25,9 @@ spec:
         - "yes"
         image: redis:4-alpine
         name: cache
-        resources: {}
+        resources:
+          requests:
+            cpu: 10m
         volumeMounts:
         - mountPath: /data
           name: docker-redis-data
