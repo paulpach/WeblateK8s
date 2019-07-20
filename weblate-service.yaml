@@ -3,7 +3,7 @@ kind: Service
 metadata:
   labels:
     io.kompose.service: weblate
-  name: weblate
+  name: weblatesvc
 spec:
   ports:
   - name: "http"

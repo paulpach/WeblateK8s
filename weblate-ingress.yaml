@@ -6,6 +6,6 @@ metadata:
     kubernetes.io/ingress.global-static-ip-name: "web-static-ip"
 spec:
   backend:
-    serviceName: weblate
+    serviceName: weblatesvc
     servicePort: 80
 
