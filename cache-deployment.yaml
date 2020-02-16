@@ -34,6 +34,5 @@ spec:
       restartPolicy: Always
       volumes:
       - name: docker-redis-data
-        persistentVolumeClaim:
-          claimName: docker-redis-data
+        emptyDir: {}
 status: {}
