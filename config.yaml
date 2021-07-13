@@ -10,4 +10,13 @@ data:
   WEBLATE_LOGLEVEL: DEBUG
   WEBLATE_REGISTRATION_OPEN: "1"
   WEBLATE_DEBUG: "0"
-
+  WEBLATE_SITE_DOMAIN: translate.blockstory.net
+  CELERY_MAIN_OPTIONS: "--pool=gevent"
+  CELERY_NOTIFY_OPTIONS: "--pool=gevent"
+  CELERY_TRANSLATE_OPTIONS: "--pool=gevent"
+  CELERY_MEMORY_OPTIONS: "--pool=gevent"
+  CELERY_BACKUP_OPTIONS: "--pool=gevent"
+  UWSGI_WORKERS: "1"
+  UWSGI_PLUGINS: "ugreen"
+  UWSGI_ASYNC: "30"
+  UWSGI_UGREEN: "true"
