@@ -85,6 +85,8 @@ spec:
         envFrom:
         - configMapRef:
             name: config
+        - secretRef:
+            name: googletranslate
         image: weblate/weblate
         name: weblate
         ports:
