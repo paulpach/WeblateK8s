@@ -87,7 +87,8 @@ spec:
             name: config
         - secretRef:
             name: googletranslate
-        image: weblate/weblate
+        #image: weblate/weblate
+        image: gcr.io/api-project-583924127000/weblate
         name: weblate
         ports:
         - containerPort: 8080
