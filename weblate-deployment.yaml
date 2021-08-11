@@ -98,10 +98,10 @@ spec:
             memory: "1Gi"
         volumeMounts:
         - mountPath: /app/data
-          name: docker-weblate-data
+          name: weblate-data
       restartPolicy: Always
       volumes:
-      - name: docker-weblate-data
+      - name: weblate-data
         persistentVolumeClaim:
-          claimName: docker-weblate-data
+          claimName: weblate-data
 status: {}

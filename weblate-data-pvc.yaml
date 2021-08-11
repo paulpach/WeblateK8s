@@ -3,12 +3,12 @@ kind: PersistentVolumeClaim
 metadata:
   creationTimestamp: null
   labels:
-    io.kompose.service: docker-weblate-data
-  name: docker-weblate-data
+    io.kompose.service: weblate-data
+  name: weblate-data
 spec:
   accessModes:
   - ReadWriteOnce
   resources:
     requests:
-      storage: 2Gi
+      storage: 3Gi
 status: {}
