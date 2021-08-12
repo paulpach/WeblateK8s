@@ -52,41 +52,13 @@ spec:
             secretKeyRef:
               name: admin
               key: PASSWORD
-        - name: WEBLATE_EMAIL_HOST
-          valueFrom:
-            secretKeyRef:
-              name: email
-              key: WEBLATE_EMAIL_HOST
-        - name: WEBLATE_EMAIL_PORT
-          valueFrom:
-            secretKeyRef:
-              name: email
-              key: WEBLATE_EMAIL_PORT
-        - name: WEBLATE_EMAIL_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: email
-              key: WEBLATE_EMAIL_PASSWORD
-        - name: WEBLATE_EMAIL_USER
-          valueFrom:
-            secretKeyRef:
-              name: email
-              key: WEBLATE_EMAIL_USER
-        - name: WEBLATE_SERVER_EMAIL
-          valueFrom:
-            secretKeyRef:
-              name: email
-              key: WEBLATE_SERVER_EMAIL
-        - name: WEBLATE_DEFAULT_FROM_EMAIL
-          valueFrom:
-            secretKeyRef:
-              name: email
-              key: WEBLATE_DEFAULT_FROM_EMAIL
         envFrom:
         - configMapRef:
             name: config
         - secretRef:
             name: googletranslate
+        - secretRef:
+            name: email
         #image: weblate/weblate
         image: gcr.io/api-project-583924127000/weblate
         name: weblate
