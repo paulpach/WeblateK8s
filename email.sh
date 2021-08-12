@@ -23,5 +23,6 @@ kubectl create secret generic email \
     --from-literal=WEBLATE_EMAIL_PASSWORD="$password" \
     --from-literal=WEBLATE_SERVER_EMAIL="$serveremail" \
     --from-literal=WEBLATE_DEFAULT_FROM_EMAIL="$serveremail" \
-    --from-literal=WEBLATE_EMAIL_USE_SSL=True
+    --from-literal=WEBLATE_EMAIL_USE_SSL=True \
+    --from-literal=WEBLATE_EMAIL_USE_TLS=False
     
