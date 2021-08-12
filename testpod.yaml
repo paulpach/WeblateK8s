@@ -4,9 +4,6 @@ metadata:
   name: task-pv-pod
 spec:
   volumes:
-    - name: docker-weblate-data
-      persistentVolumeClaim:
-        claimName: docker-weblate-data
     - name: weblate-data
       persistentVolumeClaim:
         claimName: weblate-data
@@ -17,7 +14,5 @@ spec:
         - containerPort: 80
           name: "http-server"
       volumeMounts:
-        - mountPath: /home
-          name: docker-weblate-data          
         - mountPath: /media
           name: weblate-data          
